@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.png" alt="DerivaShield" width="320"/>
+</p>
+
 # DerivaShield
 
 Detector de anomalías de red basado en cálculo diferencial. Trata el

@@ -1,0 +1,169 @@
+/* DerivaShield — tema morado sobrio
+   Las variables las consumen también los componentes de Dash via overrides. */
+
+:root {
+    --ds-bg:          #1A1226;   /* fondo principal */
+    --ds-bg-card:     #251A37;   /* paneles / cards */
+    --ds-bg-input:    #1F1530;   /* inputs */
+    --ds-border:      #3A2D54;   /* bordes sutiles */
+    --ds-border-hi:   #4D3D6E;   /* borde resaltado */
+    --ds-text:        #EDE5F5;   /* texto primario */
+    --ds-text-dim:    #9F8FB8;   /* texto secundario */
+    --ds-accent:      #8B5CF6;   /* morado vibrante (acentos, foco, botones) */
+    --ds-accent-dim:  #6B46C1;   /* hover/active */
+}
+
+html, body { background-color: var(--ds-bg); }
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar               { width: 10px; height: 10px; }
+::-webkit-scrollbar-track         { background: var(--ds-bg); }
+::-webkit-scrollbar-thumb         { background: var(--ds-border); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover   { background: var(--ds-border-hi); }
+
+/* ---------- DatePickerRange (react-dates) ---------- */
+.DateRangePickerInput,
+.DateRangePickerInput__withBorder {
+    background-color: var(--ds-bg-input) !important;
+    border: 1px solid var(--ds-border) !important;
+    border-radius: 4px !important;
+}
+.DateInput,
+.DateInput_1 {
+    background-color: transparent !important;
+}
+.DateInput_input,
+.DateInput_input_1 {
+    background-color: transparent !important;
+    color: var(--ds-text) !important;
+    border-bottom: 2px solid transparent !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    padding: 8px 10px 6px 10px !important;
+}
+.DateInput_input__focused,
+.DateInput_input__focused_2 {
+    border-bottom-color: var(--ds-accent) !important;
+}
+.DateRangePickerInput_arrow_svg,
+.DateRangePickerInput_arrow_svg_1 path {
+    fill: var(--ds-text-dim) !important;
+}
+.DateInput_fang,
+.DateInput_fangShape,
+.DateInput_fangStroke {
+    display: none !important;
+}
+
+/* Calendar popup */
+.DayPicker,
+.DayPicker__withBorder,
+.CalendarMonth,
+.CalendarMonthGrid,
+.DayPicker_transitionContainer {
+    background-color: var(--ds-bg-card) !important;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.4) !important;
+    border-radius: 6px !important;
+}
+.CalendarMonth_caption,
+.CalendarMonth_caption_1 {
+    color: var(--ds-text) !important;
+    padding-top: 18px !important;
+}
+.DayPicker_weekHeader,
+.DayPicker_weekHeader_1 {
+    color: var(--ds-text-dim) !important;
+}
+.DayPicker_weekHeader_li small {
+    color: var(--ds-text-dim) !important;
+    font-size: 11px !important;
+}
+
+.CalendarDay__default,
+.CalendarDay__default_2 {
+    background-color: var(--ds-bg-card) !important;
+    color: var(--ds-text) !important;
+    border: 1px solid var(--ds-border) !important;
+}
+.CalendarDay__default:hover {
+    background-color: var(--ds-border) !important;
+    color: var(--ds-text) !important;
+    border-color: var(--ds-border-hi) !important;
+}
+.CalendarDay__selected_span {
+    background-color: var(--ds-accent-dim) !important;
+    color: var(--ds-text) !important;
+    border-color: var(--ds-accent-dim) !important;
+}
+.CalendarDay__selected_span:hover {
+    background-color: var(--ds-accent) !important;
+    border-color: var(--ds-accent) !important;
+}
+.CalendarDay__selected,
+.CalendarDay__selected:hover,
+.CalendarDay__selected:active {
+    background-color: var(--ds-accent) !important;
+    color: #FFFFFF !important;
+    border-color: var(--ds-accent) !important;
+    font-weight: 700 !important;
+}
+.CalendarDay__hovered_span,
+.CalendarDay__hovered_span:hover {
+    background-color: var(--ds-border) !important;
+    color: var(--ds-text) !important;
+    border-color: var(--ds-border-hi) !important;
+}
+.CalendarDay__blocked_out_of_range,
+.CalendarDay__blocked_out_of_range:hover {
+    color: #5A4A75 !important;
+    background-color: var(--ds-bg) !important;
+    border-color: var(--ds-border) !important;
+}
+
+.DayPickerNavigation_button,
+.DayPickerNavigation_button__default {
+    background-color: var(--ds-bg-input) !important;
+    border: 1px solid var(--ds-border) !important;
+}
+.DayPickerNavigation_button:hover {
+    border-color: var(--ds-accent) !important;
+}
+.DayPickerNavigation_svg__horizontal {
+    fill: var(--ds-text) !important;
+}
+
+/* Botón "Reset dates" (la X que limpia) */
+.DateRangePickerInput_clearDates,
+.DateRangePickerInput_clearDates_default:focus,
+.DateRangePickerInput_clearDates_default:hover {
+    background-color: transparent !important;
+}
+.DateRangePickerInput_clearDates_svg {
+    fill: var(--ds-text-dim) !important;
+}
+
+/* ---------- Checklist ---------- */
+input[type="checkbox"] {
+    accent-color: var(--ds-accent) !important;
+}
+
+/* ---------- Botones ---------- */
+button.ds-primary {
+    background-color: var(--ds-accent) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    padding: 9px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: background-color 120ms ease;
+}
+button.ds-primary:hover { background-color: var(--ds-accent-dim) !important; }
+button.ds-primary:active { transform: translateY(1px); }
+
+/* ---------- Links de navegación activos ----------*/
+a.ds-nav-link:hover {
+    background-color: var(--ds-border) !important;
+    border-color: var(--ds-accent) !important;
+}

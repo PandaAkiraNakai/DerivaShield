@@ -209,6 +209,62 @@ class TrafficLogger:
                 for row in cur.fetchall()
             ]
 
+    def fetch_range(
+        self,
+        t_from: Optional[float] = None,
+        t_to: Optional[float] = None,
+        only_anomalies: bool = False,
+        limit: Optional[int] = None,
+    ) -> List[LogRow]:
+        """
+        Trae filas en [t_from, t_to]. Ambos extremos son opcionales:
+        si `t_from` es None toma desde el inicio, si `t_to` es None toma
+        hasta el final. Útil para la página de reportes.
+        """
+        clauses = []
+        params: list = []
+        if t_from is not None:
+            clauses.append("timestamp >= ?")
+            params.append(float(t_from))
+        if t_to is not None:
+            clauses.append("timestamp <= ?")
+            params.append(float(t_to))
+        if only_anomalies:
+            clauses.append("is_anomaly = 1")
+        where = ("WHERE " + " AND ".join(clauses)) if clauses else ""
+        sql = (
+            "SELECT timestamp, f_t, f_prime, f_double_prime, "
+            "       is_anomaly, severity, tier "
+            "FROM traffic_logs "
+            f"{where} "
+            "ORDER BY timestamp ASC"
+        )
+        if limit is not None:
+            sql += " LIMIT ?"
+            params.append(int(limit))
+        with self._connect() as conn:
+            cur = conn.execute(sql, params)
+            return [
+                LogRow(
+                    timestamp=row[0],
+                    f_t=row[1],
+                    f_prime=row[2],
+                    f_double_prime=row[3],
+                    is_anomaly=bool(row[4]),
+                    severity=row[5],
+                    tier=row[6],
+                )
+                for row in cur.fetchall()
+            ]
+
+    def date_bounds(self) -> tuple[Optional[float], Optional[float]]:
+        """Min y max timestamp persistidos. (None, None) si la tabla está vacía."""
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT MIN(timestamp), MAX(timestamp) FROM traffic_logs"
+            ).fetchone()
+            return (row[0], row[1]) if row else (None, None)
+
     def apply_retention(self, now: Optional[float] = None) -> dict:
         """
         Aplica los niveles HOT/WARM/COLD/expirado. Devuelve un dict de stats

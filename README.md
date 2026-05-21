@@ -115,6 +115,14 @@ DDoS sale como severidad HIGH, el port-scan típicamente LOW–MEDIUM.
 
 ## Dashboard
 
+![DerivaShield procesando el dataset sintético](docs/screenshot-dashboard.png)
+
+> Captura del detector corriendo sobre los 120 s del dataset sintético
+> (k=2.0, semilla 42). Los marcadores rojos `×` señalan los puntos donde
+> `f'(t) > μ + k·σ` **y** `f''(t) > 0` simultáneamente — el DDoS gaussiano
+> entre t=30 s y t=40 s y la rampa de port-scan entre t=60 s y t=90 s
+> aparecen claramente.
+
 Tres gráficos en vivo, todos compartiendo el mismo eje temporal:
 
 1. **f(t)** — tráfico en paquetes/s. Marcadores `x` rojos = anomalías.

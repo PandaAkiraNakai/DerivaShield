@@ -195,3 +195,7 @@ sobre `f'(t)`.
 - **El dashboard no muestra nada** — verifica que el thread de análisis
   esté escribiendo a la misma base de datos que lee el dashboard (`--db`).
 - **Puerto 8050 ocupado** — elige otro con `--port`.
+
+<!-- profile-excerpt -->
+Detector de anomalías de red basado en **cálculo diferencial**. Trata `paquetes/seg` como señal discreta, calcula primera y segunda derivada, y dispara alerta cuando `f'(t) > μ+kσ` **AND** `f''(t) > 0`. Caza DDoS y port-scans con baja tasa de falsos positivos. `// firewall · IDS · math-as-weapon`
+<!-- /profile-excerpt -->
